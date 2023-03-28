@@ -83,13 +83,13 @@ table follows;
 table tags;
 table photo_tags;
 
-/*Part (A) : Marketing*/
-/*1. Rewarding Most Loyal Users: People who have been using the platform for the longest time.
+/*Marketing*/
+/*Rewarding Most Loyal Users: People who have been using the platform for the longest time.
 Finding the 5 oldest users of the Instagram from the database provided*/
 select username, created_at from users
 order by created_at ASC limit 5;
 
-/*2. Remind Inactive Users to Start Posting: By sending them promotional emails to post their 1st photo.
+/* Remind Inactive Users to Start Posting: By sending them promotional emails to post their 1st photo.
 Find the users who have never posted a single photo on Instagram*/
 
 select username, users.id as user_id
@@ -112,7 +112,7 @@ from users;
 select count(distinct(photos.user_id))
 from photos;
 
-/*3. Declaring Contest Winner: The team started a contest and the user who gets the most likes on a single photo will win the contest now they wish to declare the winner.
+/* Declaring Contest Winner: The team started a contest and the user who gets the most likes on a single photo will win the contest now they wish to declare the winner.
 Identify the winner of the contest and provide their details to the team*/
 
 select users.id as user_id, users.username, photos.id as photo_id, photos.image_url, count(*) as total
@@ -139,7 +139,7 @@ table photos;
 table tags;
 table photo_tags;
 
-/*4. Hashtag Researching: A partner brand wants to know, which hashtags to use in the post to reach the most people on the platform.
+/*Hashtag Researching: A partner brand wants to know, which hashtags to use in the post to reach the most people on the platform.
 Identify and suggest the top 5 most commonly used hashtags on the platform*/
 select tags.tag_name, count(*) as total_number_of_times_tag_used_individually 
 from tags
@@ -155,15 +155,15 @@ join tags
 on tags.id = photo_tags.tag_id
 where tags.tag_name = 'smile';
 
-/*5. Launch AD Campaign: The team wants to know, which day would be the best day to launch ADs.
+/* Launch AD Campaign: The team wants to know, which day would be the best day to launch ADs.
 What day of the week do most users register on? Provide insights on when to schedule an ad campaign*/
 select dayname(created_at) as day_of_week, count(*) as total_number_of_users_registered 
 from users
 group by day_of_week
 order by total_number_of_users_registered DESC;
 
-/*Part B: Investor Metrics*/
-/*1. User Engagement: Are users still as active and post on Instagram or they are making fewer posts
+/*Investor Metrics*/
+/*User Engagement: Are users still as active and post on Instagram or they are making fewer posts
 Provide how many times does average user posts on Instagram.
 Also, provide the total number of photos on Instagram/total number of users*/
 
@@ -207,7 +207,7 @@ from photos
 group by user_id;
 
 
-/*2.Bots & Fake Accounts: The investors want to know if the platform is crowded with fake and dummy accounts
+/*Bots & Fake Accounts: The investors want to know if the platform is crowded with fake and dummy accounts
 Provide data on users (bots) who have liked every single photo on the site 
 (since any normal user would not be able to do this).*/
 select user_id, username, count(*) as total_likes_per_user
